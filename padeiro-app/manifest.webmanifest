@@ -1,6 +1,6 @@
 {
-  "name": "Padeiro App",
-  "short_name": "Padeiro",
+  "name": "BJJ APP",
+  "short_name": "BJJ APP",
   "description": "Portal do Aluno - Equipe Tetris",
   "start_url": "./index.html",
   "scope": "./",
