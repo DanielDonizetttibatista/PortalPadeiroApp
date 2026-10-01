@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Padeiro App</title>
+
+<!-- ▼▼▼ COLE AQUI O LINK /exec DO SEU PORTAL ▼▼▼ -->
+<script>
+  var EXEC_URL = "https://script.google.com/macros/s/AKfycbwMGQMo5_iDgAoxGwHtFoHPxqkEwvFUDbJacpx3XnNmbx0Mc-QmWKREwmWyNOWh3Ww/exec";
+</script>
+<!-- ▲▲▲ (ex.: https://script.google.com/macros/s/AKfy.../exec ) ▲▲▲ -->
+
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#2b5bd7">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Padeiro App">
+<style>
+  :root{ --azul:#2b5bd7; }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:#ffffff;color:#22303f;
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:28px;gap:18px}
+  img.logo{width:160px;height:160px;border-radius:24px;box-shadow:0 10px 30px rgba(43,91,215,.22)}
+  h1{font-size:22px;margin:0;font-weight:700}
+  p{margin:0;color:#6b7685;font-size:14.5px;line-height:1.5;max-width:320px}
+  .btn{margin-top:6px;padding:14px 26px;border:none;border-radius:14px;background:var(--azul);
+    color:#fff;font-weight:700;font-size:16px;cursor:pointer;text-decoration:none}
+  .btn:active{transform:translateY(1px)}
+  .dica{font-size:12.5px;color:#9aa0a6;max-width:320px}
+  .spin{width:34px;height:34px;border:4px solid #e9e5dc;border-top-color:var(--azul);
+    border-radius:50%;animation:g .8s linear infinite;display:none}
+  @keyframes g{to{transform:rotate(360deg)}}
+  .abrindo .btn,.abrindo .dica,.abrindo h1,.abrindo p{display:none}
+  .abrindo .spin{display:block}
+</style>
+</head>
+<body>
+  <img class="logo" src="icon-512.png" alt="Padeiro App">
+  <div class="spin"></div>
+  <h1>Padeiro App</h1>
+  <p>Portal do Aluno — Equipe Tetris.</p>
+  <a class="btn" id="abrir" href="#">Abrir o Portal</a>
+  <div class="dica">Dica: no menu do navegador, toque em <b>“Adicionar à tela inicial”</b> para virar um app com este ícone. 🥋</div>
+
+<script>
+  (function(){
+    function irParaPortal(){
+      if(!EXEC_URL || EXEC_URL.indexOf("COLE_AQUI") === 0){
+        alert("Configure o link do portal no arquivo index.html (variável EXEC_URL).");
+        return;
+      }
+      document.body.classList.add('abrindo');
+      window.location.replace(EXEC_URL);
+    }
+    // instalado como app (standalone) → abre o portal automaticamente
+    var standalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    document.getElementById('abrir').addEventListener('click', function(e){ e.preventDefault(); irParaPortal(); });
+    if(standalone){ irParaPortal(); }
+
+    if('serviceWorker' in navigator){
+      window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); });
+    }
+  })();
+</script>
+</body>
+</html>
